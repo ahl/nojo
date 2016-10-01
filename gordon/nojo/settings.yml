@@ -1,0 +1,13 @@
+# Copyright 2016 Adam H. Leventhal. All rights reserved.
+# Licensed under the Apache License, version 2.0:
+# http://www.apache.org/licenses/LICENSE-2.0
+
+lambdas:
+  get:
+    code: get
+    handler: code.handler
+    runtime: nodejs4.3
+    build:
+      - cp -Rf * {target}
+      - GOOS={go_target_os} GOARCH={go_target_arch} go build -o {target}/code_go_compiled ../../..
+      - chmod +x {target}/code_go_compiled
