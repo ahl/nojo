@@ -4,7 +4,7 @@
 
 project: nojo
 default-region: us-west-2
-code-bucket: !!python/object/apply:subprocess.check_output [[perl, -pe, 's/\n//', code-bucket]]
+code-bucket: ref://CodeBucketName
 
 apps:
   - gordon.contrib.lambdas
@@ -25,4 +25,3 @@ apigateway:
         request_templates:
           application/json: |
             { "nomspath" : "$input.params('nomspath')" }
-

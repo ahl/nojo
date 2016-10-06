@@ -35,10 +35,11 @@ $ go run nojo.go http://demo.noms.io/hn::raw.value.items[10000000] | python -m j
 
 Nojo is designed to be used as an AWS Lambda. You'll need to [install Gordon](http://gordon.readthedocs.io/en/latest/installation.html). You'll also need to [install the AWS CLI tools](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) and configure them.
 
-First you'll need to specify the S3 bucket where you want your code to live.  By default, Gordon defines the bucket in the project's `settings.yml` file, but because the S3 bucket is global (per-region) sharing `settings.yml` files becomes tricky. Instead we specify our S3 bucket in an ancillary file and give it a (probably) unique name:
+First you'll need to specify the S3 bucket where you want your code to live.  By default, Gordon defines the bucket in the project's `settings.yml` file, but because the S3 bucket is global (per-region) you need to configure its value. We do this using Gordon's support for parameters to specify a (probably) unique bucket name:
 
 ```sh
-$ echo gordon-nojo-$(date +%s) >gordon/code-bucket
+$ mkdir gordon/parameters
+$ echo CodeBucketName: gordon-nojo-$(date +%s) >gordon/parameters/common.yml
 ```
 
 Now you can build and deploy the Lambda:
