@@ -20,8 +20,6 @@ apigateway:
           method.request.querystring.nomspath: True
         integration:
           lambda: nojo.get
-          parameters:
-            integration.request.querystring.nomspath: method.request.header.nomspath
         request_templates:
           application/json: |
             { "nomspath" : "$input.params('nomspath')" }
